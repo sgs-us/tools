@@ -1,6 +1,6 @@
 #!env python
 
-""" Mounts the SSH locations to the given mount points. Create ~/mnt before. Use -u to umount. """
+""" Mounts the SSH locations to the given mount points. Create ~/mnt and all mount points before. Use -u to umount. """
 
 import subprocess, sys
 
