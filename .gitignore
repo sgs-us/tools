@@ -4,3 +4,5 @@
 *.pyc
 *.o
 a.out
+# ignore temp vim files
+*.swp

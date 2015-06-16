@@ -20,9 +20,9 @@ def concat_iter(iterable, join = ""):
 try:
     path = norm_path(sys.argv[1])
 except:
-    print "Please suppy a path."
+    print "Please supply a path."
     sys.exit(-1)
-    
+
 print "Working on ", path
 
 # Walking from / to current working dir
@@ -46,7 +46,7 @@ for root, dirs, files in os.walk(path):
             print "Setting permissions on %s" % d
             os.chmod(f, st | stat.S_IROTH | stat._SIXOTH)
 
-            
+
     for f in files:
         f = os.path.join(root, f)
         st = os.stat(f).st_mode
@@ -55,4 +55,4 @@ for root, dirs, files in os.walk(path):
         else:
             print "Setting permissions on %s" % f
             os.chmod(f, st | stat.S_IROTH)
-           
+
