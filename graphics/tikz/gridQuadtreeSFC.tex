@@ -1,0 +1,127 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usetikzlibrary{shapes,plotmarks,arrows,positioning,calc,decorations.pathreplacing,backgrounds,graphdrawing,graphs}
+\usegdlibrary{trees}
+\usepackage{xifthen}
+\usepackage{relsize}
+
+%========custom commands========
+% in TikZ ``, '' is a reserved word. Alias your way around it :-)
+\newcommand{\comma}{,}
+
+%transforms all coordinates the same way when used (use it within a scope!)
+%(rotation is not 45 degress to avoid overlapping edges)
+% Input: point of origins x and y coordinate
+\newcommand{\myGlobalTransformation}[2]
+{
+    \pgftransformcm{1}{0}{0.4}{0.5}{\pgfpoint{#1 cm}{#2 cm}}
+}
+
+\tikzset{fontscale/.style = {font=\relsize{#1}}}
+
+\begin{document}
+\begin{tikzpicture}[>=stealth]%, every node/.style={circle, draw}]
+  % grid, left side
+  \begin{scope}
+    \myGlobalTransformation{0}{0}
+    %% this is a rather ugly way of specifying things. Using TikZ calc library
+    %  to create subrectangles and space filling curve is left as an exercise.
+    % level 0
+    \draw (0, 0) rectangle (8, 8);
+
+    % level 1
+    \draw (0, 0) rectangle (4, 4);
+    \draw (4, 0) rectangle (8, 4);
+    \draw (0, 4) rectangle (4, 8);
+    \draw (4, 4) rectangle (8, 8);
+
+    % level 2
+    \draw (0, 0) rectangle (2, 2);
+    \draw (2, 0) rectangle (4, 2);
+    \draw (0, 2) rectangle (2, 4);
+    \draw (2, 2) rectangle (4, 4);
+    \draw (0, 4) rectangle (2, 6);
+    \draw (2, 4) rectangle (4, 6);
+    \draw (0, 6) rectangle (2, 8);
+    \draw (2, 6) rectangle (4, 8);
+
+    % level 3
+    \draw (0, 2) rectangle (1, 3);
+    \draw (1, 2) rectangle (2, 3);
+    \draw (0, 3) rectangle (1, 4);
+    \draw (1, 3) rectangle (2, 4);
+    \draw (0, 4) rectangle (1, 5);
+    \draw (1, 4) rectangle (2, 5);
+    \draw (0, 5) rectangle (1, 6);
+    \draw (1, 5) rectangle (2, 6);
+
+    % space filling curve
+    \draw[red,draw opacity=.75] (1., 1.) -- (3., 1.);
+    \draw[red,draw opacity=.75] (3., 1.) -- (0.5, 2.5);
+    \draw[red,draw opacity=.75] (0.5, 2.5) -- (1.5, 2.5);
+    \draw[red,draw opacity=.75] (1.5, 2.5) -- (0.5, 3.5);
+    \draw[red,draw opacity=.75] (0.5, 3.5) -- (1.5, 3.5);
+    \draw[red,draw opacity=.75] (1.5, 3.5) -- (3, 3);
+    \draw[red,draw opacity=.75] (3, 3.) -- (6., 2.);
+    \draw[red,draw opacity=.75] (6., 2.) -- (0.5, 4.5);
+    \draw[red,draw opacity=.75] (0.5, 4.5) -- (1.5, 4.5);
+    \draw[red,draw opacity=.75] (1.5, 4.5) -- (0.5, 5.5);
+    \draw[red,draw opacity=.75] (0.5, 5.5) -- (1.5, 5.5);
+    \draw[red,draw opacity=.75] (1.5, 5.5) -- (3., 5.);
+    \draw[red,draw opacity=.75] (3., 5.) -- (1., 7.);
+    \draw[red,draw opacity=.75] (1., 7) -- (3., 7.);
+    \draw[red,draw opacity=.75] (3, 7) -- (6., 6.);
+
+    % indices
+    \draw node at(1.0, 1.0) {\footnotesize(2, 0)};
+    \draw node at(3.0, 1.0) {\footnotesize(2, 4)};
+    \draw node at(0.5, 2.5) {\tiny(3, 8)};
+    \draw node at(1.5, 2.5) {\tiny(3, 9)};
+    \draw node at(0.5, 3.5) {\tiny(3, 10)};
+    \draw node at(1.5, 3.5) {\tiny(3, 11)};
+    \draw node at(3.0, 3.0) {\footnotesize(3, 12)};
+    \draw node at(6.0, 2.0) {\footnotesize(1, 16)};
+    \draw node at(0.5, 4.5) {\tiny(3, 32)};
+    \draw node at(1.5, 4.5) {\tiny(3, 33)};
+    \draw node at(0.5, 5.5) {\tiny(3, 34)};
+    \draw node at(1.5, 5.5) {\tiny(3, 35)};
+    \draw node at(3.0, 5.0) {\footnotesize(2, 36)};
+    \draw node at(1.0, 7.0) {\footnotesize(2, 40)};
+    \draw node at(3.0, 7.0) {\footnotesize(2, 44)};
+    \draw node at(6.0, 6.0) {\footnotesize(1, 48)};
+  \end{scope}
+
+  % tree, right side
+  \begin{scope}
+    \pgftransformcm{1}{0}{0}{1}{\pgfpoint{16 cm}{3.5 cm}}
+    \graph [tree layout, grow=down, fresh nodes, level distance=1.25cm, sibling distance=1cm]
+    {
+      a [as={\textcolor{gray}{$\scriptstyle(0\comma 0)$}}] -> {
+        b [as={\textcolor{gray}{$\scriptstyle(1\comma 0)$}}] -> {
+            c [as={$\scriptstyle(2\comma 0)$}],
+            d [as={$\scriptstyle(2\comma 4)$}],
+            e [as={\textcolor{gray}{$\scriptstyle(2\comma 8)$}}] -> {
+              f [as={$\scriptstyle(3\comma 8)$}],
+              g [as={$\scriptstyle(3\comma 9)$}],
+              h [as={$\scriptstyle(3\comma 10)$}],
+              i [as={$\scriptstyle(3\comma 11)$}]
+            },
+            j [as={$\scriptstyle(2\comma 12)$}]
+          },
+          k [as={$\scriptstyle(1\comma 16)$}, xshift=1.5cm],
+          l [as={\textcolor{gray}{$\scriptstyle(1\comma 32)$}}, xshift=-1.5cm]-> {
+            m [as={\textcolor{gray}{$\scriptstyle(2\comma 32)$}}, xshift=-.75cm] -> {
+              n [as={$\scriptstyle(3\comma 32)$}],
+              o [as={$\scriptstyle(3\comma 33)$}],
+              p [as={$\scriptstyle(3\comma 34)$}],
+              q [as={$\scriptstyle(3\comma 35)$}]
+            },
+            r [as={$\scriptstyle(2\comma 36)$}, xshift=-.75cm],
+            s [as={$\scriptstyle(2\comma 40)$}, xshift=-.75cm],
+            t [as={$\scriptstyle(2\comma 44)$}, xshift=-.75cm],
+          },
+          u [as={$\scriptstyle(1\comma 48)$}]
+        }
+    };
+  \end{scope}
+\end{tikzpicture}
+\end{document}
