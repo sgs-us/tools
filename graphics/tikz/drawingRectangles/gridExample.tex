@@ -1,0 +1,42 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usetikzlibrary{shapes,backgrounds,3d,calc,arrows}
+\usepackage{python}
+
+\makeatletter
+\tikzoption{canvas is xy plane at z}[]{%
+  \def\tikz@plane@origin{\pgfpointxyz{0}{0}{#1}}%
+  \def\tikz@plane@x{\pgfpointxyz{1}{0}{#1}}%
+  \def\tikz@plane@y{\pgfpointxyz{0}{1}{#1}}%
+  \tikz@canvas@is@plane
+}
+\makeatother
+
+\tikzset{xyp/.style={canvas is xy plane at z=#1}}
+\tikzset{xzp/.style={canvas is xz plane at y=#1}}
+\tikzset{yzp/.style={canvas is yz plane at x=#1}}
+
+\begin{document}
+\begin{tikzpicture}
+\tikzset{every path/.append style={line width=0.1pt}}
+\begin{python}
+from quadsToTikZ import gridFromEnc2D
+
+# exemplary grid, binary encoded (1 = refined cell, 0 = unrefined cell)
+enc = '1101000000100000101000000'
+gridFromEnc2D(enc)
+\end{python}
+\end{tikzpicture}
+
+\begin{tikzpicture}[x = {(1cm, 0cm)},
+                    y = {(0.25cm, 0.25cm)},
+                    z = {(0cm, 1cm)}]
+\tikzset{every path/.append style={line width=0.1pt}}
+  \begin{python}
+from quadsToTikZ import gridFromEnc3D
+
+# exemplary grid, binary encoded (1 = refined cell, 0 = unrefined cell)
+enc = '1101000000000000001000000000001000010000000000000'
+gridFromEnc3D(enc)
+  \end{python}
+\end{tikzpicture}
+\end{document}
