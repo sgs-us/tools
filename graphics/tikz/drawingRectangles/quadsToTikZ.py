@@ -16,15 +16,11 @@ note: to use this file within tikz you have to add the following definition to y
 \tikzset{yzp/.style={canvas is yz plane at x=#1}}
 '''
 
-def quad2D(lowerLeft, upperRight, angle=0):
-    print (r"\begin{scope}")
-    # print (r"\pgftransformcm{%f}{%f}{%f}{%f}{\pgfpoint{0 cm}{0 cm}}" % (cos(angle), sin(angle), cos(angle), -sin(angle)))
+def quad2D(lowerLeft, upperRight):
     print (r"\draw (%f, %f) rectangle (%f, %f);" % (lowerLeft[0], lowerLeft[1],
                                                     upperRight[0], upperRight[1]))
-    print (r"\end{scope}")
 
 def quad3D(backLowerLeft, frontUpperRight):
-    print (r"\begin{scope}")
     print (r"\draw[xyp=%f] (%f, %f) rectangle (%f, %f);" %
            (backLowerLeft[2],
             backLowerLeft[0]  , backLowerLeft[1]  ,
@@ -51,11 +47,22 @@ def quad3D(backLowerLeft, frontUpperRight):
            (frontUpperRight[0],
             backLowerLeft[1]  , backLowerLeft[2],
             frontUpperRight[1], frontUpperRight[2]))
-    print (r"\end{scope}")
+    print ("\n")
 
-def gridFromEnc2D(enc):
+
+def drawCurve2D (pts):
+    print (r" \draw [color=red]")
+    for p in pts:
+        if p != pts[-1]:
+            print (r"(%f, %f) -- " % (p[0], p[1]))
+        else:
+            print (r"(%f, %f);" % (p[0], p[1]))
+
+
+def gridFromEnc2D(enc, showCurve=False):
     level = 0
     lctr = [0]
+    curvePts = []
     quads = []
 
     # function to increment the level counter; includes completion of blocks
@@ -76,6 +83,8 @@ def gridFromEnc2D(enc):
                 lctr.append(0)
         else:
             pos = [[0, 0], [1, 1]]
+            if showCurve:
+                crv = [0, 0]
             if len(lctr) < level:
                 lctr.append(0)
             for i in range(level + 1):
@@ -86,19 +95,34 @@ def gridFromEnc2D(enc):
             pos[1][0] = pos[0][0] + 1./float(1 << level)
             pos[1][1] = pos[0][1] + 1./float(1 << level)
             quads.append(pos)
+            if showCurve:
+                crv[0] = pos[0][0] + 1./float(1 << (level + 1))
+                crv[1] = pos[0][1] + 1./float(1 << (level + 1))
+                curvePts.append(crv)
             incrLCtr(level)
 
     for q in quads:
         quad2D(q[0], q[1])
+    if showCurve:
+        drawCurve2D (curvePts)
 
-def gridFromEnc3D(enc):
+
+def drawCurve3D (pts):
+    print (r" \draw [color=red]")
+    for p in pts:
+        if p != pts[-1]:
+            print (r"(%f, %f, %f) -- " % (p[0], p[1], p[2]))
+        else:
+            print (r"(%f, %f, %f);" % (p[0], p[1], p[2]))
+
+
+def gridFromEnc3D(enc, showCurve=False):
     level = 0
     lctr = [0]
+    curvePts = []
     quads = []
 
-    # process encoding and draw child cells (i.e. all unrefined cells)
-    # import ipdb; ipdb.set_trace()
-
+    # function to increment the level counter; includes completion of blocks
     def incrLCtr(l):
         nonlocal level
         if lctr[l] < 7:
@@ -108,7 +132,7 @@ def gridFromEnc3D(enc):
             incrLCtr(l-1)
             level -= 1
 
-
+    # process encoding and draw child cells (i.e. all unrefined cells)
     for c in enc:
         if c == '1':
             level += 1
@@ -116,6 +140,8 @@ def gridFromEnc3D(enc):
                 lctr.append(0)
         else:
             pos = [[0, 0, 0], [1, 1, 1]]
+            if showCurve:
+                crv = [0, 0, 0]
             if len(lctr) < level:
                 lctr.append(0)
             for i in range(level + 1):
@@ -132,7 +158,14 @@ def gridFromEnc3D(enc):
             pos[1][1] = pos[0][1] + 1./float(1 << level)
             pos[1][2] = pos[0][2] + 1./float(1 << level)
             quads.append(pos)
+            if showCurve:
+                crv[0] = pos[0][0] + 1./float(1 << (level + 1))
+                crv[1] = pos[0][1] + 1./float(1 << (level + 1))
+                crv[2] = pos[0][2] + 1./float(1 << (level + 1))
+                curvePts.append(crv)
             incrLCtr(level)
 
     for q in quads:
         quad3D(q[0], q[1])
+    if showCurve:
+        drawCurve3D (curvePts)
