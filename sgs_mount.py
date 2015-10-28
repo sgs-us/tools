@@ -18,10 +18,10 @@ except IndexError:
     arg = ""
 
 print(arg)
-for m in mounts:
+for dev, diry in mounts:
     if arg == "-u":
-        cmd = "fusermount -u " + m[1]
+        cmd = "fusermount -u " + diry
     else:
-        cmd = "sshfs " + m[0] + " " + m[1]
+        cmd = "sshfs " + dev + " " + diry
     print(cmd)
     subprocess.call( cmd, shell=True )
