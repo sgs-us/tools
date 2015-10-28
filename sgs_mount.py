@@ -23,5 +23,8 @@ for dev, diry in mounts:
         cmd = "fusermount -u " + diry
     else:
         cmd = "sshfs " + dev + " " + diry
-    print(cmd)
-    subprocess.call(cmd, shell=True)
+    print(cmd, end=": ")
+    if not subprocess.call(cmd, shell=True):
+        print("OK.")
+    else:
+        print("FAILED.")
