@@ -20,9 +20,9 @@ except IndexError:
 print(arg)
 for dev, diry in mounts:
     if arg == "-u":
-        cmd = "fusermount -u " + diry
+        cmd = "fusermount -u {}".format(diry)
     else:
-        cmd = "sshfs " + dev + " " + diry
+        cmd = "sshfs {} {}".format(dev, diry)
     print(cmd, end=": ")
     if not subprocess.call(cmd, shell=True):
         print("OK.")
