@@ -24,4 +24,4 @@ for dev, diry in mounts:
     else:
         cmd = "sshfs " + dev + " " + diry
     print(cmd)
-    subprocess.call( cmd, shell=True )
+    subprocess.call(cmd, shell=True)
