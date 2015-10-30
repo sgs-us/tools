@@ -12,14 +12,10 @@ mounts = [
     # ["supermuc:", "~/mnt/supermuc"] 
 ]
 
-try:
-    arg = sys.argv[1]
-except IndexError:
-    arg = ""
+uflag = len(sys.argv) > 1 and sys.argv[1] == "-u"
 
-print(arg)
 for dev, diry in mounts:
-    if arg == "-u":
+    if uflag:
         cmd = "fusermount -u {}".format(diry)
     else:
         cmd = "sshfs {} {}".format(dev, diry)
