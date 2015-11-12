@@ -1,4 +1,4 @@
-#!env python3
+#!/usr/bin/env python3
 
 """ Mounts the SSH locations to the given mount points. Create ~/mnt and all mount points before. Use -u to umount. """
 
