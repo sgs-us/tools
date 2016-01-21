@@ -1,25 +1,23 @@
-#!env python3
+#!/usr/bin/env python3
 
 """ Mounts the SSH locations to the given mount points. Create ~/mnt and all mount points before. Use -u to umount. """
 
-import subprocess, sys
+import subprocess, sys, os
 
+whoami = os.getlogin()
 mounts = [
     ["helium:/import/sgs.local", "~/mnt/sgs"],
     ["helium:", "~/mnt/home"],
-    ["helium:/data2/scratch", "~/mnt/scratch"],
+    ["helium:/data2/scratch/{}".format(whoami), "~/mnt/scratch"],
+    ["neon:/data/scratch/{}".format(whoami), "~/mnt/neon_scratch"],
     ["ipvslogin:/import/www.ipvs", "~/mnt/www.ipvs"],
     # ["supermuc:", "~/mnt/supermuc"] 
 ]
 
-try:
-    arg = sys.argv[1]
-except IndexError:
-    arg = ""
+uflag = len(sys.argv) > 1 and sys.argv[1] == "-u"
 
-print(arg)
 for dev, diry in mounts:
-    if arg == "-u":
+    if uflag:
         cmd = "fusermount -u {}".format(diry)
     else:
         cmd = "sshfs {} {}".format(dev, diry)
