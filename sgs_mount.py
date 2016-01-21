@@ -2,12 +2,13 @@
 
 """ Mounts the SSH locations to the given mount points. Create ~/mnt and all mount points before. Use -u to umount. """
 
-import subprocess, sys
+import subprocess, sys, os
 
+whoami = os.getlogin()
 mounts = [
     ["helium:/import/sgs.local", "~/mnt/sgs"],
     ["helium:", "~/mnt/home"],
-    ["helium:/data2/scratch", "~/mnt/scratch"],
+    ["helium:/data2/scratch/{}".format(whoami), "~/mnt/scratch"],
     ["ipvslogin:/import/www.ipvs", "~/mnt/www.ipvs"],
     # ["supermuc:", "~/mnt/supermuc"] 
 ]
