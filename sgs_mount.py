@@ -9,6 +9,7 @@ mounts = [
     ["helium:/import/sgs.local", "~/mnt/sgs"],
     ["helium:", "~/mnt/home"],
     ["helium:/data2/scratch/{}".format(whoami), "~/mnt/scratch"],
+    ["neon:/data/scratch/{}".format(whoami), "~/mnt/neon_scratch"],
     ["ipvslogin:/import/www.ipvs", "~/mnt/www.ipvs"],
     # ["supermuc:", "~/mnt/supermuc"] 
 ]
