@@ -5,6 +5,7 @@
 import subprocess, sys, os
 
 whoami = os.getlogin()
+
 mounts = [
     ["helium:/import/sgs.local", "~/mnt/sgs"],
     ["helium:", "~/mnt/home"],
@@ -21,7 +22,7 @@ for dev, diry in mounts:
         cmd = "fusermount -u {}".format(diry)
     else:
         cmd = "sshfs {} {}".format(dev, diry)
-    print(cmd, end=": ")
+    print("{:70s}".format(cmd), end="")
     if not subprocess.call(cmd, shell=True):
         print("OK.")
     else:
