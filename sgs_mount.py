@@ -23,7 +23,10 @@ for dev, diry in mounts:
     else:
         cmd = "sshfs {} {}".format(dev, diry)
     print("{:70s}".format(cmd), end="")
-    if not subprocess.call(cmd, shell=True):
+    try:
+        subprocess.check_call(cmd, shell=True, timeout = 10)
         print("OK.")
-    else:
+    except subprocess.CalledProcessError:
         print("FAILED.")
+    except subprocess.TimeoutExpired:
+        print("TIMEOUT.")
