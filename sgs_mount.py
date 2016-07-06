@@ -2,7 +2,7 @@
 
 """ Mounts the SSH locations to the given mount points. Create ~/mnt and all mount points before. Use -u to umount. """
 
-import subprocess, sys, os
+import subprocess, sys, os, threading
 
 whoami = os.getlogin()
 
@@ -15,18 +15,28 @@ mounts = [
     # ["supermuc:", "~/mnt/supermuc"] 
 ]
 
-uflag = len(sys.argv) > 1 and sys.argv[1] == "-u"
+mstatus = ["OK", "FAILED", "TIMEOUT"]
 
-for dev, diry in mounts:
-    if uflag:
-        cmd = "fusermount -u {}".format(diry)
+def mount_cmd(dev, diry, unmount):
+    if unmount:
+        return "fusermount -u {}".format(diry)
     else:
-        cmd = "sshfs {} {}".format(dev, diry)
-    print("{:70s}".format(cmd), end="")
+        return "sshfs {} {}".format(dev, diry)
+
+def thrd_mount(cmd):
     try:
-        subprocess.check_call(cmd, shell=True, timeout = 10)
-        print("OK.")
+        subprocess.check_call(cmd, shell=True, timeout=10)
+        ret = 0
     except subprocess.CalledProcessError:
-        print("FAILED.")
+        ret = 1
     except subprocess.TimeoutExpired:
-        print("TIMEOUT.")
+        ret = 2
+    print("{:70s} {}".format(cmd, mstatus[ret]))
+
+if __name__ == "__main__":
+    uflag = len(sys.argv) > 1 and sys.argv[1] == "-u"
+
+    for dev, diry in mounts:
+        cmd = mount_cmd(dev, diry, uflag)
+        threading.Thread(target=thrd_mount, args=(cmd,)).start()
+
