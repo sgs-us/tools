@@ -26,11 +26,13 @@ def mount_cmd(dev, diry, unmount):
 def thrd_mount(cmd):
     try:
         subprocess.check_call(cmd, shell=True, timeout=10)
-        ret = 0
     except subprocess.CalledProcessError:
         ret = 1
     except subprocess.TimeoutExpired:
         ret = 2
+    else:
+        ret = 0
+
     print("{:70s} {}".format(cmd, mstatus[ret]))
 
 if __name__ == "__main__":
