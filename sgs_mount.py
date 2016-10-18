@@ -2,9 +2,9 @@
 
 """ Mounts the SSH locations to the given mount points. Create ~/mnt and all mount points before. Use -u to umount. """
 
-import subprocess, sys, os, threading
+import subprocess, sys, os, pwd, threading
 
-whoami = os.getlogin()
+whoami = pwd.getpwuid(os.geteuid()).pw_name
 
 mounts = [
     ["helium:/import/sgs.local", "~/mnt/sgs"],
