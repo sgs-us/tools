@@ -1,4 +1,4 @@
-#!env python2
+#!env python3
 
 import argparse, logging, subprocess, sys, threading, time
 import numpy as np
@@ -6,7 +6,8 @@ import numpy as np
 log = logging.getLogger(sys.argv[0])
 
 def setup_argparse():
-    parser = argparse.ArgumentParser(description='Times processes.')
+    parser = argparse.ArgumentParser(description='Times processes.',
+                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("--rep", "-r", default=1, type=int, help='Number of repetitions')
     parser.add_argument("--time", "-t", default=0, type=float, help='Maximum total runtime of timing tests')
     parser.add_argument("--timestamps", "-s", help="Print regular timestamps to stdout.")
@@ -21,7 +22,8 @@ def setup_logging(level):
     # INFO	20
     # DEBUG	10
     # NOTSET	0
-    logging.basicConfig(level=level)
+    logging.basicConfig(level=level,
+                        format = "%(levelname)s: %(message)s")
 
 
 def execute(cmd):
@@ -31,7 +33,7 @@ def execute(cmd):
     t1 = time.time()
     log.info("Executing command took {:5.4} seconds.".format(t1 - t0))
     if ret_code != 0:
-        log.warning("%s returned with %s", cmd, ret_code)
+        log.warning("'%s' returned with %s", cmd, ret_code)
     return t1 - t0
 
 def measure(cmd, max_time, max_rep):
@@ -65,8 +67,7 @@ def start_timestamping(interval):
     while True:
         i += 1
         time.sleep(interval)
-        print("==== Timestep {}, time elapsed {:.4}.====".format(i, time.time() - t0))
-        
+        log.info("==== Timestep {}, time elapsed {:.4}s ====".format(i, time.time() - t0))
 
     
 def main():
@@ -82,9 +83,9 @@ def main():
         thread.start()
                 
     times = measure(command, args.time, args.rep)
-    print("Execution of %s finished." % command)
-    print("Total time: {:.4} seconds.".format(np.sum(times)))
-    print("Max: {:.4}, Min: {:.4}, Mean: {:.4}, StdDev: {:.6f}".format(np.max(times), np.min(times), np.mean(times), np.std(times)))
+    log.info("Execution of %s finished." % command)
+    log.info("Total time: {:.4} seconds.".format(np.sum(times)))
+    log.info("Max: {:.4}, Min: {:.4}, Mean: {:.4}, StdDev: {:.6f}".format(np.max(times), np.min(times), np.mean(times), np.std(times)))
     log.debug(times)
 
 if __name__ == "__main__":
