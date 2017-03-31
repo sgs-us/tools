@@ -67,7 +67,7 @@ def start_timestamping(interval):
     while True:
         i += 1
         time.sleep(interval)
-        log.info("==== Timestep {}, time elapsed {:.4}s ====".format(i, time.time() - t0))
+        log.info("==== Timestamp {}, time elapsed {:.4}s ====".format(i, time.time() - t0))
 
     
 def main():
