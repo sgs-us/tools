@@ -83,9 +83,16 @@ def main():
         thread.start()
                 
     times = measure(command, args.time, args.rep)
+    times = np.sort(times)
     log.info("Execution of %s finished." % command)
-    log.info("Total time: {:.4} seconds.".format(np.sum(times)))
+    log.info("Total time: {:.4} seconds for {} runs.".format(np.sum(times), len(times)))
     log.info("Max: {:.4}, Min: {:.4}, Mean: {:.4}, StdDev: {:.6f}".format(np.max(times), np.min(times), np.mean(times), np.std(times)))
+    if len(times) > 2:
+        log.info("More than 2 runs, printing results without the slowest and fastest run: ")
+        t = times[1:-1]
+        log.info("  Total time: {:.4} seconds for {} runs.".format(np.sum(t), len(t)))
+        log.info("  Max: {:.4}, Min: {:.4}, Mean: {:.4}, StdDev: {:.6f}".format(np.max(t), np.min(t), np.mean(t), np.std(t)))
+    
     log.debug(times)
 
 if __name__ == "__main__":
