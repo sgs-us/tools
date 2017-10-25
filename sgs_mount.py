@@ -21,7 +21,7 @@ def mount_cmd(dev, diry, unmount):
     if unmount:
         return "fusermount -u {}".format(diry)
     else:
-        return "sshfs {} {}".format(dev, diry)
+        return "sshfs -o idmap=user {} {}".format(dev, diry)
 
 def thrd_mount(cmd):
     try:
