@@ -1,0 +1,437 @@
+% horizontal rule equivalent to \cline but with 2pt width
+\newcommand{\Cline}[1]{%
+ \noalign{\global\setlength\Origarrayrulewidth{\arrayrulewidth}}%
+ \noalign{\global\setlength\arrayrulewidth{2pt}}\cline{#1}%
+ \noalign{\global\setlength\arrayrulewidth{\Origarrayrulewidth}}%
+}
+
+% draw a vertical rule of width 2pt on both sides of a cell
+\newcommand\Thickvrule[1]{%
+  \multicolumn{1}{!{\vrule width 2pt}c!{\vrule width 2pt}}{#1}%
+}
+
+% draw a vertical rule of width 2pt on the left side of a cell
+\newcommand\Thickvrulel[1]{%
+  \multicolumn{1}{!{\vrule width 2pt}c|}{#1}%
+}
+
+% draw a vertical rule of width 2pt on the right side of a cell
+\newcommand\Thickvruler[1]{%
+  \multicolumn{1}{|c!{\vrule width 2pt}}{#1}%
+}
+
+%\theoremstyle{plain}
+%\newtheorem{theorem}{Satz}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{Theorem}[theorem]{Theorem}
+%\newtheorem{corollary}[theorem]{Korollar}
+%
+%\theoremstyle{definition}
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{algorithmThm}[theorem]{Algorithmus}
+%\newtheorem{remark}[theorem]{Bemerkung}
+%\newtheorem{example}[theorem]{Beispiel}
+%\newtheorem{outlook}[theorem]{Ausblick}
+%\newtheorem{notation}[theorem]{Notation}
+%
+%%\numberwithin{equation}{section}
+%\numberwithin{theorem}{section}
+
+\newcommand{\TODO}[1]{\textcolor{red}{[TODO: #1]}}
+\newcommand{\DaH}[1]{\textcolor{blue}{[DH: #1]}}
+\newcommand{\FF}[1]{\textcolor{red}{[FF: #1]}}
+\newcommand{\DP}[1]{\textcolor{blue}{[DP: #1]}}
+
+
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calJ}{\mathcal{J}}
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calZ}{\mathcal{Z}}
+
+\providecommand{\bfa}{\boldsymbol{a}}
+\providecommand{\bfb}{\boldsymbol{b}}
+\providecommand{\bfc}{\boldsymbol{c}}
+\providecommand{\bfd}{\boldsymbol{d}}
+\providecommand{\bfe}{\boldsymbol{e}}
+\providecommand{\bff}{\boldsymbol{f}}
+\providecommand{\bfg}{\boldsymbol{g}}
+\providecommand{\bfh}{\boldsymbol{h}}
+\providecommand{\bfi}{\boldsymbol{i}}
+\providecommand{\bfj}{\boldsymbol{j}}
+\providecommand{\bfk}{\boldsymbol{k}}
+\providecommand{\bfl}{\boldsymbol{l}}
+\providecommand{\bfm}{\boldsymbol{m}}
+\providecommand{\bfn}{\boldsymbol{n}}
+\providecommand{\bfo}{\boldsymbol{o}}
+\providecommand{\bfp}{\boldsymbol{p}}
+\providecommand{\bfq}{\boldsymbol{q}}
+\providecommand{\bfr}{\boldsymbol{r}}
+\providecommand{\bfs}{\boldsymbol{s}}
+\providecommand{\bft}{\boldsymbol{t}}
+\providecommand{\bfu}{\boldsymbol{u}}
+\providecommand{\bfv}{\boldsymbol{v}}
+\providecommand{\bfw}{\boldsymbol{w}}
+\providecommand{\bfx}{\boldsymbol{x}}
+\providecommand{\bfy}{\boldsymbol{y}}
+\providecommand{\bfz}{\boldsymbol{z}}
+
+\providecommand{\bfA}{\boldsymbol{A}}
+\providecommand{\bfB}{\boldsymbol{B}}
+\providecommand{\bfC}{\boldsymbol{C}}
+\providecommand{\bfD}{\boldsymbol{D}}
+\providecommand{\bfE}{\boldsymbol{E}}
+\providecommand{\bfF}{\boldsymbol{F}}
+\providecommand{\bfG}{\boldsymbol{G}}
+\providecommand{\bfH}{\boldsymbol{H}}
+\providecommand{\bfI}{\boldsymbol{I}}
+\providecommand{\bfJ}{\boldsymbol{J}}
+\providecommand{\bfK}{\boldsymbol{K}}
+\providecommand{\bfL}{\boldsymbol{L}}
+\providecommand{\bfM}{\boldsymbol{M}}
+\providecommand{\bfN}{\boldsymbol{N}}
+\providecommand{\bfO}{\boldsymbol{O}}
+\providecommand{\bfP}{\boldsymbol{P}}
+\providecommand{\bfQ}{\boldsymbol{Q}}
+\providecommand{\bfR}{\boldsymbol{R}}
+\providecommand{\bfS}{\boldsymbol{S}}
+\providecommand{\bfT}{\boldsymbol{T}}
+\providecommand{\bfU}{\boldsymbol{U}}
+\providecommand{\bfV}{\boldsymbol{V}}
+\providecommand{\bfW}{\boldsymbol{W}}
+\providecommand{\bfX}{\boldsymbol{X}}
+\providecommand{\bfY}{\boldsymbol{Y}}
+\providecommand{\bfZ}{\boldsymbol{Z}}
+
+\providecommand{\bfalpha}{\boldsymbol{\alpha}}
+\providecommand{\bfbeta}{\boldsymbol{\beta}}
+\providecommand{\bfgamma}{\boldsymbol{\gamma}}
+\providecommand{\bfdelta}{\boldsymbol{\delta}}
+\providecommand{\bfepsilon}{\boldsymbol{\epsilon}}
+\providecommand{\bfvarepsilon}{\boldsymbol{\varepsilon}}
+\providecommand{\bfzeta}{\boldsymbol{\zeta}}
+\providecommand{\bfeta}{\boldsymbol{\eta}}
+\providecommand{\bftheta}{\boldsymbol{\theta}}
+\providecommand{\bfvartheta}{\boldsymbol{\vartheta}}
+\providecommand{\bfiota}{\boldsymbol{\iota}}
+\providecommand{\bfkappa}{\boldsymbol{\kappa}}
+\providecommand{\bflambda}{\boldsymbol{\lambda}}
+\providecommand{\bfmu}{\boldsymbol{\mu}}
+\providecommand{\bfnu}{\boldsymbol{\nu}}
+\providecommand{\bfxi}{\boldsymbol{\xi}}
+\providecommand{\bfpi}{\boldsymbol{\pi}}
+\providecommand{\bfvarpi}{\boldsymbol{\varpi}}
+\providecommand{\bfrho}{\boldsymbol{\rho}}
+\providecommand{\bfsigma}{\boldsymbol{\sigma}}
+\providecommand{\bfvarsigma}{\boldsymbol{\varsigma}}
+\providecommand{\bftau}{\boldsymbol{\tau}}
+\providecommand{\bfupsilon}{\boldsymbol{\upsilon}}
+\providecommand{\bfphi}{\boldsymbol{\phi}}
+\providecommand{\bfvarphi}{\boldsymbol{\varphi}}
+\providecommand{\bfchi}{\boldsymbol{\chi}}
+\providecommand{\bfpsi}{\boldsymbol{\psi}}
+\providecommand{\bfomega}{\boldsymbol{\omega}}
+\providecommand{\bfGamma}{\boldsymbol{\Gamma}}
+\providecommand{\bfDelta}{\boldsymbol{\Delta}}
+\providecommand{\bfTheta}{\boldsymbol{\Theta}}
+\providecommand{\bfLambda}{\boldsymbol{\Lambda}}
+\providecommand{\bfXi}{\boldsymbol{\Xi}}
+\providecommand{\bfPi}{\boldsymbol{\Pi}}
+\providecommand{\bfSigma}{\boldsymbol{\Sigma}}
+\providecommand{\bfUpsilon}{\boldsymbol{\Upsilon}}
+\providecommand{\bfPhi}{\boldsymbol{\Phi}}
+\providecommand{\bfPsi}{\boldsymbol{\Psi}}
+\providecommand{\bfOmega}{\boldsymbol{\Omega}}
+
+\providecommand{\bfOne}{\boldsymbol{1}}
+\providecommand{\bfTwo}{\boldsymbol{2}}
+\providecommand{\bfThree}{\boldsymbol{3}}
+\providecommand{\bfFour}{\boldsymbol{4}}
+\providecommand{\bfFive}{\boldsymbol{5}}
+\providecommand{\bfSix}{\boldsymbol{6}}
+\providecommand{\bfSeven}{\boldsymbol{7}}
+\providecommand{\bfEight}{\boldsymbol{8}}
+\providecommand{\bfNine}{\boldsymbol{9}}
+\providecommand{\bfZero}{\boldsymbol{0}}
+
+\providecommand{\bfinfty}{\boldsymbol{\infty}}
+
+%Miscellaneous
+\newcommand{\diff}{\,\mathrm{d}}
+\newcommand{\quot}[1]{\enquote{#1}}
+\newcommand{\setof}[1]{\widehat{#1}} %die Menge einer Algebra
+\newcommand{\WLOG}{without loss of generality}
+\DeclareMathOperator{\fst}{fst}
+\DeclareMathOperator{\snd}{snd}
+\DeclareMathOperator{\id}{id}
+
+%Functions
+\newcommand{\successor}[1]{s(#1)}
+\newcommand{\predecessor}[1]{p(#1)}
+\newcommand{\successors}[1]{S_{#1}}
+\newcommand{\predecessors}[1]{P_{#1}}
+\newcommand{\innerSet}[1]{\widehat{#1}}
+
+%Operators for Relations
+\newcommand{\equalDef}{\coloneqq}
+\newcommand{\defEqual}{\eqqcolon}
+\newcommand{\equivDef}{:\Leftrightarrow}
+
+%Operators for Functions
+\newcommand{\dProd}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\revdProd}[2]{\,\overleftrightarrow{\!\dProd{#1}{#2}\!}\,}
+\newcommand{\revrevdProd}[2]{\,\overleftrightarrow{\overleftrightarrow{\!\dProd{#1}{#2}\!}}\,}
+\newcommand{\dProdFunc}{\dProd{\cdot}{\cdot}}
+\newcommand{\revdProdFunc}{\revdProd{\cdot}{\cdot}}
+\newcommand{\revrevdProdFunc}{\revrevdProd{\cdot}{\cdot}}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\logtwo}{\log_2}
+
+%Operators for Sets
+\newcommand{\powerset}[1]{\calP(#1)}
+\newcommand{\card}[1]{|#1|}
+
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Kern}{Kern}
+\DeclareMathOperator{\Bild}{Bild}
+%\DeclareMathOperator{\det}{det}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\intdiv}{div}
+
+%Concrete Set Identifiers
+\newcommand{\steadyOn}[1]{C(#1)}
+
+\newcommand{\natOne}{\bbN^+}
+\newcommand{\natZero}{\bbN_0}
+\newcommand{\oneToN}[1]{\bbN^{(#1)}}
+\newcommand{\integers}{\bbZ}
+\newcommand{\rationals}{\bbQ}
+\newcommand{\reals}{\bbR}
+\newcommand{\complex}{\bbC}
+
+\newcommand{\posReals}{\bbR^+}
+\newcommand{\nonNegReals}{\bbR_0^+}
+\newcommand{\negReals}{\bbR^-}
+\newcommand{\nonPosReals}{\bbR_0^-}
+
+\newcommand{\domain}[1]{\dom \left( #1 \right)}
+\newcommand{\codomain}[1]{\cod \left( #1 \right)}
+\newcommand{\image}[1]{\im \left( #1 \right)}
+
+%Complexity Sets
+%\newcommand{\compEq}[2][]{\Theta_{#1} \left( #2 \right)}
+%\newcommand{\compLess}[2][]{o_{#1} \left( #2 \right)}
+%\newcommand{\compLeq}[2][]{\calO_{#1} \left( #2 \right)}
+%\newcommand{\compGreater}[2][]{\omega_{#1} \left( #2 \right)}
+%\newcommand{\compGeq}[2][]{\Omega_{#1} \left( #2 \right)}
+\newcommand{\compEq}[1]{\Theta \left( #1 \right)}
+\newcommand{\compLess}[1]{o\left( #1 \right)}
+\newcommand{\compLeq}[1]{\calO\left( #1 \right)}
+\newcommand{\compGreater}[1]{\omega\left( #1 \right)}
+\newcommand{\compGeq}[1]{\Omega\left( #1 \right)}
+\newcommand{\subsEq}{\subseteq}
+\newcommand{\subsNeq}{\subsetneq}
+
+\newcommand{\assign}{\leftarrow}
+
+\providecommand{\piValue}{3.1415926535897932384626433832795}
+
+\newcommand{\mean}{\mathbb{E}}
+\newcommand{\var}{\mathbb{V}}
+\newcommand{\dd}{\text{d}}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\newcommand{\ovl}{\overline}
+
+%\DeclareCaptionSubType*[arabic]{figure}
+%\captionsetup[subfigure]{labelformat=simple,labelsep=colon}
+
+\newcommand{\lmax}{l_{\text{max}}}
+\newcommand{\ntable}{\text{neighbors}}
+\newcommand{\otable}{\text{orientations}}
+\newcommand{\dir}{\mathrm{dir}}
+\newcommand{\nDim}{\mathrm{nDim}}
+\newcommand{\tableDepth}{\text{tableDepth}}
+\newcommand{\orientation}{\text{orientation}}
+
+% other variables
+\newcommand{\etah}{\hat{\eta}}
+\newcommand{\vh}{\hat{v}}
+\newcommand{\bfvh}{\hat{\bfv}}
+\newcommand{\Deltah}{\hat{\Delta}}
+
+% -----------------------------------------------
+% Notation
+\newcommand{\model}{\mathcal{M}}
+\newcommand{\uct}{\response^{\text{CT}}_\calL}
+\newcommand{\upc}{\response^{\text{PC}}_\calP}
+\newcommand{\upch}{\hat{\response}^{\text{PC}}_\calP}
+\newcommand{\Fcal}{\mathcal{F}}
+
+\newcommand{\response}{u}
+\newcommand{\ctlevel}{\ell}
+\newcommand{\level}{l}
+\newcommand{\levelap}{l'}
+\newcommand{\bflevel}{\boldsymbol{\level}}
+\newcommand{\rv}{\xi}
+\newcommand{\rvi}{\rv^{(i)}}
+\newcommand{\rvs}{\boldsymbol{\xi}}
+\newcommand{\rvsi}{\boldsymbol{\xi}^{(i)}}
+\newcommand{\samplespace}{\Gamma}
+\newcommand{\sample}{\gamma}
+\newcommand{\stochasticspace}{\Xi}
+\newcommand{\gridpointsn}{\stochasticspace^{(n)}}
+\newcommand{\gridpointslevel}{\stochasticspace^{(\nlevel)}}
+\newcommand{\gridpointslevelap}{\stochasticspace^{(n_{\levelap})}}
+\newcommand{\gridpointsbflevel}{\stochasticspace^{(n_{\bflevel})}}
+\newcommand{\basis}{\varphi}
+\newcommand{\basislj}{\basis_{\level, j}}
+\newcommand{\basisljk}{\basis^{(k)}_{\level, j}}
+
+\newcommand{\transbasis}{\psi}
+\newcommand{\transbasisk}{\transbasis^{(k)}}
+\newcommand{\transbasisbfm}{\transbasis_{\bfm}}
+\newcommand{\transbasislj}{\transbasis_{\level, j}}
+\newcommand{\transbasisbfj}{\transbasis_{\bfj}}
+\newcommand{\transbasisbfi}{\transbasis_{\bfi}}
+\newcommand{\transbasisjkk}{\transbasis_{j_k}^{(k)}}
+\newcommand{\transbasisikk}{\transbasis_{i_k}^{(k)}}
+
+\newcommand{\dims}{d}
+
+\newcommand{\nlevel}{n_\level}
+\newcommand{\node}{\gp}
+\newcommand{\nodei}{\gp_i}
+\newcommand{\nodej}{\gp_j}
+
+\newcommand{\xj}{x_j}
+\newcommand{\xlj}{x_{l,j}}
+\newcommand{\xilj}{x^{(i)}_{l,j}}
+\newcommand{\xli}{x_{li}}
+\newcommand{\xone}{x^{(1)}_{l_1 j_1}}
+\newcommand{\xd}{x^{(d)}_{l_d j_d}}
+\newcommand{\xseq}{(\xlj)_{j=1}^{\nl}}
+\newcommand{\xbflj}{x_{\bflevel, \bfj}}
+\newcommand{\vlj}{v_{l, j}}
+\newcommand{\tvilj}{\tilde{v}^{(i)}_{l, j}}
+\newcommand{\tvklj}{\tilde{v}^{(k)}_{l, j}}
+\newcommand{\tvone}{\tilde{v}^{(1)}_{l_1 j_1}}
+\newcommand{\tvd}{\tilde{v}^{(d)}_{l_d j_d}}
+\newcommand{\vseq}{(\vlj)}
+
+\newcommand{\tenC}{\bfT}
+\newcommand{\Cbfm}{\tenC_{\bfm}}
+\newcommand{\Cbfl}{\tenC_{\bflevel}}
+\newcommand{\CCT}{\tenC^{\mathrm{CT}}_{\calL}}
+
+\newcommand{\colvec}{\bfc}
+\newcommand{\colveci}{c} % column vector indexed (i.e. it is only a scalar component)
+\newcommand{\colten}{\bfC}
+\newcommand{\colteni}{C} % column tensor indexed
+
+\newcommand{\indexSet}{\calL}
+
+\newcommand{\alg}{\calR}
+
+
+\newcommand{\Ltwo}{$L^2$}
+\newcommand{\Ltwoleja}{\Ltwo-Leja~}
+
+\newcommand{\unit}{[0, 1]}
+
+\newcommand{\deltaij}{\delta_{i, j}}
+\newcommand{\gp}{\rv}
+\newcommand{\gpli}{\gp_{l, i}}
+\newcommand{\gplj}{\gp_{l, j}}
+\newcommand{\gplik}{\gp_{l, i}^{(k)}}
+\newcommand{\gpljk}{\gp_{l, j}^{(k)}}
+\newcommand{\gplkik}{\gp_{l_k, i_k}}
+\newcommand{\gplkjk}{\gp_{l_k, j_k}}
+\newcommand{\gpone}{\gp^{(1)}_{\level_1, j_1}}
+\newcommand{\gpd}{\gp^{(d)}_{\level_d, j_d}}
+\newcommand{\gpbflj}{\gp_{\bflevel, \bfj}}
+\newcommand{\gpbfli}{\gp_{\bflevel, \bfi}}
+
+\newcommand{\pdf}{f}
+\newcommand{\interpolant}{\tilde{\response}}
+\newcommand{\Phit}{\tilde{\Phi}}
+
+\newcommand{\Lnorm}[3]{\left\|#1\right\|_{L^{#2}(#3, f)}}
+\newcommand{\Lqnorm}[1]{\Lnorm{#1}{q}{\stochasticspace}}
+\newcommand{\Linftynorm}[1]{\Lnorm{#1}{\infty}{\stochasticspace}}
+\newcommand{\Ltwonorm}[1]{\Lnorm{#1}{2}{\stochasticspace}}
+\newcommand{\Ltwonormsquared}[1]{\Lnorm{#1}{2}{\stochasticspace}^2}
+\newcommand{\Ltwonormsquaredinterval}[1]{\Lnorm{#1}{2}{[\node_i, \node_{i + 1}]}^2}
+\newcommand{\Lonenorm}[1]{\Lnorm{#1}{1}{\stochasticspace}}
+
+\newcommand{\LqnormSingle}[1]{\big\|#1\big\|_{L^q(\stochasticspace, f)}}
+
+\newcommand{\abs}[1]{\left|#1\right|}
+
+\newcommand{\rvseqj}{(\rv_j)_{j=1}^{n}}
+
+\newcommand{\Vand}{\bfV}
+\newcommand{\VandScalar}{V}
