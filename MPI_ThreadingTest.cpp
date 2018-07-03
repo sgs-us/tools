@@ -8,21 +8,35 @@ using std::endl;
 
 int main(int argc, char *argv[])
 {
-  int provided = 0;
-  MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE , &provided);
-  cout << "provided = " << provided << endl;
+  if (argc == 1) {
+    cout << "Usage: " << argv[0] << " {init | query}" << endl;
+    return 0;
+  }
+  std::string arg = argv[1];
+  int provided = -1;
+  
+  if (arg == "init") {
+    cout << "Trying to initialize for MPI_THREAD_MULTIPLE" << endl;
+    MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE , &provided);
+    cout << "provided = " << provided << endl;
+  }
+  if (arg == "query") {
+    MPI_Init(&argc, &argv);
+    cout << "Querying default thread level" << endl;
+    MPI_Query_thread(&provided);
+  }
   switch (provided) {
   case MPI_THREAD_SINGLE:
-    cout << "MPI_THREAD_SINGLE provided." << endl;
+    cout << "MPI_THREAD_SINGLE detected." << endl;
     break;
   case MPI_THREAD_FUNNELED:
-    cout << "MPI_THREAD_FUNNELED provided." << endl;
+    cout << "MPI_THREAD_FUNNELED detected." << endl;
     break;
   case MPI_THREAD_SERIALIZED:
-    cout << "MPI_THREAD_SERIALIZED provided." << endl;
+    cout << "MPI_THREAD_SERIALIZED detected." << endl;
     break;
   case MPI_THREAD_MULTIPLE:
-    cout << "MPI_THREAD_MULTIPLE provided." << endl;
+    cout << "MPI_THREAD_MULTIPLE detected." << endl;
     break;
   }
   
